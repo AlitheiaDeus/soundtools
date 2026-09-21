@@ -17,11 +17,18 @@ A lightweight, pure-Python script that prompts for an audio file path (`.wav`) a
 - Automatically handles mono/stereo averaging and resamples to 48 kHz.
 - Uses **Blackman-Harris** windowed Short-Time Fourier Transform (STFT) via `scipy.signal`.
 
+### 3. `converter_pro.py` — Multithreaded/Multiprocess FLAC to MP3 Converter
+A high-throughput batch converter from `.flac` to 320 kbps `.mp3` with tag preservation.
+- Scans current directory for `.flac` files and skips existing converted tracks.
+- Uses `pydub.utils.mediainfo` to preserve metadata tags (Title, Artist, Album, Track).
+- Converts songs in parallel across all CPU cores via `ProcessPoolExecutor`.
+- Displays real-time progress using `tqdm`.
+
 ---
 
 ## Requirements
 
 ```bash
-pip install numpy matplotlib scipy pyaudio librosa
+pip install numpy matplotlib scipy pyaudio librosa pydub tqdm
 ```
-*(On Windows, `pyaudio` can also be installed via `pip install pyaudio` or from precompiled wheels).*
+*(On Windows, ensure `ffmpeg` is installed or on your PATH for `pydub` conversions).*
